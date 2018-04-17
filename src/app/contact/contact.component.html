@@ -1,6 +1,30 @@
 <div>
-    <mat-tab-group>
-        <mat-tab label="Contact Name">Name:Angad Bhangale</mat-tab>
-        <mat-tab label="Contact No">8888665263</mat-tab>
-    </mat-tab-group>
+    <mat-toolbar color="primary">
+        <span>Contact Us</span>
+    </mat-toolbar>
+    <form [formGroup]="cGroup">
+        <mat-card>
+            <div>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Name" class="form-control" formControlName="name" required>
+                    <mat-error *ngIf="cGroup.controls.name.hasError('required')">name is required</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="email" class="form-control" formControlName="email" required>
+                    <mat-error *ngIf="cGroup.controls.email.hasError('required')">email is required</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field>
+                    <textarea matInput placeholder="Textarea" matTextareaAutosize matAutosizeMinRows="2" formControlName="textarea" matAutosizeMaxRows="5"></textarea>
+                    <mat-error *ngIf="cGroup.controls.textarea.hasError('required')">please write something</mat-error>
+                </mat-form-field>
+            </div>
+            <button mat-raised-button color="primary" [disabled]="!cGroup.valid" (click)="Submit()">Submit</button>
+        </mat-card>
+    </form>
 </div>

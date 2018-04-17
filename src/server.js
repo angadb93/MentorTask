@@ -24,8 +24,21 @@ app.post('/userdata', function (req, res) {
         res.json(obj)
         res.end();
     })
-
 }),
+
+app.post('/contactData', function(req, res){
+    var rbody = req.body;
+    rbody.date = new Date();
+    console.log(rbody);
+    MongoClient.connect(Url, (err, conn)=>{
+        var dbs = conn.db('Userlist');
+        dbs.collection('Userlist').save(rbody)
+        var obj = {status : "success"};
+        res.json(obj)
+        res.end();
+    })
+
+})
 
     app.post('/saveData', function (req, res) {
         console.log(req.body);
