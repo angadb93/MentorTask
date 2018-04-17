@@ -1,0 +1,100 @@
+<div style="text-align: center">
+  <form [formGroup]="rGroup" class="example-form">
+
+      <mat-toolbar color="primary">
+          <span><mat-icon>mood</mat-icon></span>
+          <span>Registration form</span>
+        </mat-toolbar>
+
+    <mat-card>
+    <mat-grid-list cols="4" rowHeight="4:2">
+      <mat-grid-tile>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Name" class="form-control" formControlName="EnterName" required>
+          <mat-error *ngIf="rGroup.controls.EnterName.hasError('required')">name is required</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Username" class="form-control" formControlName="UserName" required>
+          <mat-error *ngIf="rGroup.controls.UserName.hasError('required')">username is required</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Password" type="password" class="form-control" formControlName="Password" required>
+          <!-- <mat-error *ngIf="rGroup.controls.password.hasError('required')">Field is required</mat-error> -->
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Email" class="form-control" formControlName="email" required>
+          <mat-error *ngIf="rGroup.controls.email.hasError('required')">enter a correct email</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="City" class="form-control" formControlName="city" required>
+          <mat-error *ngIf="rGroup.controls.city.hasError('required')">enter city name</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput type="text" placeholder="Contact No." class="form-control" formControlName="contact" required>
+          <mat-error *ngIf="rGroup.controls.contact.hasError('required')">enter your contact number</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+        <mat-grid-tile>
+            <mat-radio-group class="form-control" formControlName="gender">
+              <label>Gender : </label>
+              <mat-radio-button value="male">Male</mat-radio-button>
+              <mat-radio-button value="female">Female</mat-radio-button>
+            </mat-radio-group>
+          </mat-grid-tile>
+    
+
+      <mat-grid-tile>
+        <p>Your hobbies from following :</p>
+        <div *ngFor="let hobby of hobbies">
+          <label for="">
+            <input type="checkbox" name="hobbies" value="{{hobby}}" (change)="updateCheck(hobby.name, $event.target.checked)"> {{hobby.name}}
+          </label>
+        </div>
+        <!-- <section class="example-section" formControlName="checker">
+              <p>Your hobbies from following :</p>
+                <mat-checkbox class="example-margin" [(ngModel)]="checked1">Music</mat-checkbox>
+                <mat-checkbox class="example-margin" [(ngModel)]="checked2">Playing</mat-checkbox>
+                <mat-checkbox class="example-margin" [(ngModel)]="checked3">Outing</mat-checkbox>
+                <mat-checkbox class="example-margin" [(ngModel)]="checked4">Cooking</mat-checkbox>
+              </section> -->
+        <!-- <div formArrayName="hobbiesList">
+                  <div *ngFor="let hobby of hobbiesList.controls; let i=index" [formGroupName]="i" >
+                    <input type="checkbox" formControlName="isChosen" /> {{hobby.controls.name.value}}
+                  </div> -->
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+          <mat-form-field>
+            <mat-select placeholder="Favorite animal" class="form-control" formControlName="animalControl" required>
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let animal of animals" [value]="animal">
+                {{animal.name}}
+              </mat-option>
+            </mat-select>
+            <!-- <mat-error *ngIf="animalControl.hasError('required')">Please choose an animal</mat-error> -->
+            <mat-error *ngIf="rGroup.controls['animalControl'].hasError('required')">Please choose an animal</mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+     
+    </mat-grid-list>
+    <button mat-raised-button color="primary" [disabled]="!rGroup.valid" (click)="save()">Save</button>
+    </mat-card>
+  </form>
+</div>

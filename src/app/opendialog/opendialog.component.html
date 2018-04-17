@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>Install Angular</h2>
+<div class="container">
+  <form>
+    <table class="table table-striped">
+      <mat-dialog-content>
+        <mat-form-field>
+          <input matInput placeholder="name" disabled [value]="data.EnterName">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="UserName" disabled [value]="data.UserName">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="email" disabled [value]="data.email">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="gender" disabled [value]="data.gender">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="contact" disabled [value]="data.contact">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="city" disabled [value]="data.city">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Fav animal" disabled [value]="data.animalControl">
+        </mat-form-field>
+      </mat-dialog-content>
+    </table>
+    <mat-dialog-actions>
+      <button mat-button mat-dialog-close>Cancel</button>
+      <!-- <button mat-button [mat-dialog-close]="true">Install</button> -->
+    </mat-dialog-actions>
+    <!-- <button mat-raised-button color="primary" (click)="dialogRef.close()">Close</button> -->
+  </form>
+</div>

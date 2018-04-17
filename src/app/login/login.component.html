@@ -1,0 +1,29 @@
+<body style="text-align: center">
+
+    <mat-toolbar color="primary">
+        <span><mat-icon>mood</mat-icon></span>
+        <span>Login form</span>
+      </mat-toolbar>
+
+    <mat-card>
+  <form [formGroup]="Form" class="example-form" (ngSubmit)="login()">
+    <div>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="username" class="form-control" formControlName="username" value="admin"
+          required>
+        <mat-error *ngIf="Form.controls.username.hasError('required')">username required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="password" class="form-control" formControlName="password" type="password"
+          required>
+        <mat-error *ngIf="Form.controls.password.hasError('required')">password required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <button mat-raised-button color="primary" type="submit">Login</button>
+  </form>
+  </mat-card>
+</body>
