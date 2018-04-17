@@ -97,29 +97,73 @@ app.get('/getInfo/:pageIndex/:pageSize', function (req, res) {
     })
 });
 
-app.get('/getInfo/:pageIndex/:pageSize/:colname/:direction', function(req, res){
-    console.log("angad",req.params.colname);
-    console.log("angad1",req.params.direction);
-    MongoClient.connect(Url, function(err, conn){
+app.get('/getInfo/:pageIndex/:pageSize/:colname/:direction', function (req, res) {
+    console.log("angad", req.params.colname);
+    console.log("angad1", req.params.direction);
+    MongoClient.connect(Url, function (err, conn) {
         if (err) throw err;
         dbs = conn.db('Userlist');
         var page = req.params.pageIndex || 1;
         var size = parseInt(req.params.pageSize) || 3;
         var start = ((parseInt(page) + 1) - 1) * (size)
         var pageIndex = parseInt(req.params.pageIndex);
+        var dir = req.params.direction;
+        var col = req.params.colname;
         var count = dbs.collection("Userlist").find().count().then(function (numItems) {
             console.log("qqq", numItems);
-            let result = dbs.collection("Userlist").find().sort().skip(page * size).limit(size).toArray(function (err, data) {
+            if (dir == "asc") {
+                var mysort = { [col]: 1 };
+            }
+            else {
+                var mysort = { [col]: -1 };
+            }
+            let result = dbs.collection("Userlist").find().sort(mysort).skip(page * size).limit(size).toArray(function (err, data) {
                 if (err) throw err;
-                //    console.log("send:",data);
+                console.log("send:", data);
                 res.send({ data: data, pageIndex: pageIndex, pageSize: size, count: numItems });
             });
-
         });
     });
 });
 
 
+// app.get('/getInfo/:pageIndex/:pageSize/:colname/:direction', function (req, res) {
+//     console.log("angad", req.params.colname);
+//     console.log("angad1", req.params.direction);
+//     MongoClient.connect(Url, function (err, conn) {
+//         if (err) throw err;
+//         dbs = conn.db('Userlist');
+//         var page = req.params.pageIndex || 1;
+//         var size = parseInt(req.params.pageSize) || 3;
+//         pageNo=parseInt(req.params.pageIndex)+1;
+//         var skip = ((parseInt(page) + 1) - 1) * (size)
+//         //var skip=((parseInt(req.params.pageIndex)+1)-1)*parseInt(req.params.pageSize);
+//         var pageIndex = parseInt(req.params.pageIndex);
+//         var query;
+//         var count = dbs.collection("Userlist").find().count({},function (err,count) {
+//             console.log("qqq", count);
+//             if (err) {
+//                 totalcount = 0;
+//                 res.send({ 'validation': 'Errors...', 'status': 'false' });
+//             }
+//             else {
+//                 totalcount = count;
+//             }
+//         });
+//         query = dbs.collection("Userlist").find();
+//         if (req.params.colname == ' ' || req.params.direction == ' ') {
+//             query.skip(skip);
+//             query.limit(size);
+//         } else {
+//             var col = req.params.colname;
+//             var dir = (req.params.direction == 'asc') ? 1 : -1;
+//             query.sort({ [col]: dir })
+//             query.skip(skip);
+//             query.limit(size);
+//         }
+//         res.send({ pageIndex: pageIndex, pageSize: size, count: count });
+//     });
+// });
 
 app.get('/:pageIndex/:pageSize/:filterValue', function (req, res) {
     console.log("FILTER:", req.params.pageIndex, req.params.pageSize, req.params.filterValue);

@@ -49,22 +49,31 @@ export class UserlistComponent implements OnInit {
   @ViewChild('filter') filter: ElementRef;
   @ViewChild('input') inputElRef: ElementRef;
 
+  apiUrl = "http://localhost:2000";
+  constructor(private http: HttpClient, public dialog: MatDialog, private service: DataService, fb: FormBuilder) {
+    
+  }
+
+  ngAfteViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  
+
+  ngOnInit() {
+    this.sort.active = " ";
+    this.sort.direction = "asc";
+    //this.onSubmit(this.paginator);
+    this.getData()
+  }
+
   applyFilter(filterValue: string) {
     console.log("qqqqq", this.dataSource);
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     //   this.dataSource.paginator = this.paginator;
     this.dataSource.filter = filterValue;
-  }
-
-  ngAfteViewInit() {
-    this.dataSource.paginator = this.paginator;
-  //  this.dataSource.sort = this.sort;
-  }
-
-  apiUrl = "http://localhost:2000";
-  constructor(private http: HttpClient, public dialog: MatDialog, private service: DataService, fb: FormBuilder) {
-    
   }
 
   getData(){
@@ -88,54 +97,16 @@ export class UserlistComponent implements OnInit {
     // this.sortedData = this.dataSource.slice();
   }
 
-  ngOnInit() {
-    this.sort.active = " ";
-    this.sort.direction = "asc";
-    //this.onSubmit(this.paginator);
-    this.getData()
-
-    //   this.formCtrlSub = this.EnterNameControl.valueChanges
-    //  .subscribe(newValue => {
-    //    console.log("new",newValue);
-    //    this.EnterName = newValue
-    //    if(this.EnterName==""){
-    //      console.log("filter value :",this.EnterName);
-    //      this.dataSource=new MatTableDataSource(this.data1 as Array<any>);
-    //    }
-    //    else
-    //    {
-    //      if(this.EnterName=null)
-    //      {
-    //        this.EnterName='empty';
-    //        this.service.search(this.paginator.pageIndex,this.paginator.pageSize,this.EnterName).subscribe((res)=>{
-    //         console.log('filter result :',res);
-    //         this.dataSource=new MatTableDataSource(res as Array<any>);
-    //         });
-    //      }
-    //      else
-    //      {
-    //        console.log("FV",this.EnterName)
-    //       this.service.search(this.paginator.pageIndex,this.paginator.pageSize,this.EnterName).subscribe((res)=>{
-    //         console.log('filter result :',res);
-    //         this.dataSource=new MatTableDataSource(res as Array<any>);
-    //         });
-    //      }
-    //    }
-    //  });
-
-  }
   sortData(sort){
     //console.log("angad",sort);
-    console.log("angad",sort.active);
-    console.log("angad",sort.direction);
+    console.log("angad : ",sort.active);
+    console.log("angad1 :",sort.direction);
     this.sort.active =sort.active;
     this.sort.direction = sort.direction;
     if(!this.sort.active || this.sort.direction == "")
     {
       this.sort.active = " "
       this.sort.direction = "asc";
-     //. this.getData();
-      return;
     }
     this.getData();
   }

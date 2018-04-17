@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {DataService} from '../data.service';
 
 @Component({
   selector: 'app-delete',
@@ -9,7 +10,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 export class DeleteComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<DeleteComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, public dataService: DataService) { }
 
   ngOnInit() {
   }
@@ -18,8 +19,16 @@ export class DeleteComponent implements OnInit {
   //   this.dialogRef.close();
   // }
 
-  confirmDelete() {
+  // confirmDelete() {
+  //   this.dialogRef.close();
+  // }
+
+  onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  confirmDelete(): void {
+    this.dataService.deleteIssue(this.data.EnterName);
   }
 
 }
