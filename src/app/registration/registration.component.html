@@ -32,7 +32,10 @@
       <mat-grid-tile>
         <mat-form-field class="example-full-width">
           <input matInput placeholder="Email" class="form-control" formControlName="email" required>
-          <mat-error *ngIf="rGroup.controls.email.hasError('required')">enter a correct email</mat-error>
+          <mat-error *ngIf=" rGroup.controls.email.hasError('email') && !rGroup.controls.email.hasError('required')">please enter valid email address</mat-error>
+                    <mat-error *ngIf="rGroup.controls.email.hasError('required')">
+                            Email is <strong>required</strong>
+                          </mat-error>
         </mat-form-field>
       </mat-grid-tile>
 

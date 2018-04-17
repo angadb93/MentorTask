@@ -13,8 +13,11 @@
 
             <div>
                 <mat-form-field class="example-full-width">
-                    <input matInput placeholder="email" class="form-control" formControlName="email" required>
-                    <mat-error *ngIf="cGroup.controls.email.hasError('required')">email is required</mat-error>
+                    <input matInput placeholder="Email" class="form-control" formControlName="email" required>
+                    <mat-error *ngIf=" cGroup.controls.email.hasError('email') && !cGroup.controls.email.hasError('required')">please enter valid email address</mat-error>
+                    <mat-error *ngIf="cGroup.controls.email.hasError('required')">
+                            Email is <strong>required</strong>
+                          </mat-error>
                 </mat-form-field>
             </div>
 

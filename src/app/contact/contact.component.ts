@@ -19,7 +19,8 @@ export class ContactComponent implements OnInit {
   constructor(public router: Router, public snackBar: MatSnackBar, private fb: FormBuilder, private http: HttpClient) { 
     this.cGroup = fb.group({
       name: ['', Validators.required],
-      email: ['', Validators.compose([Validators.required, Validators.minLength(5)])],
+      //email: ['', Validators.compose([Validators.required, Validators.minLength(5)])],
+      email : ['',[Validators.required, Validators.email]],
       textarea: ['',Validators.required]
     })
   }
