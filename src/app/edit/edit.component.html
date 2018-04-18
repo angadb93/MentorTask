@@ -36,9 +36,11 @@
                     <mat-error *ngIf="eGroup.controls.animalControl.hasError('required')">field is required</mat-error>
                 </mat-form-field>
             </div>
-            <button mat-raised-button color="primary" [disabled]="!eGroup.valid" (click)="onNoClick()">Save</button>
+            <mat-dialog-actions>
+                <button mat-raised-button color="primary" [disabled]="!eGroup.valid" (click)="onNoClick()">Save</button>
                 <!-- <button mat-raised-button color="primary" (click)="close()">cancle</button> -->
-                <button mat-button mat-dialog-close >Cancel</button>
+                <button mat-button mat-dialog-close>Cancel</button>
+            </mat-dialog-actions>
         </table>
     </form>
 </div>

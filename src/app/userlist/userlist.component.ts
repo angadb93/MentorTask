@@ -181,43 +181,35 @@ export class UserlistComponent implements OnInit {
     })
   }
 
-  // sortData(sort: Sort) {
-  //   const data = this.dataSource.slice();
-  //   if (!sort.active || sort.direction == '') {
-  //     this.sortedData = data;
-  //     return;
-  //   }
-
-  //   this.sortedData = data.sort((a, b) => {
-  //     let isAsc = sort.direction == 'asc';
-  //     switch (sort.active) {
-  //       case 'EnterName': return this.compare(a.name, b.name, isAsc);
-  //       case 'UserName': return this.compare(+a.UserName, +b.UserName, isAsc);
-  //       case 'email': return this.compare(+a.email, +b.email, isAsc);
-  //       case 'gender': return this.compare(+a.gender, +b.gender, isAsc);
-  //       case 'contact': return this.compare(+a.contact, +b.contact, isAsc);
-  //       case 'city': return this.compare(+a.city, +b.city, isAsc);
-  //       case 'animalControl': return this.compare(+a.animalControl, +b.animalControl, isAsc);
-  //       default: return 0;
-  //     }
-  //   });
-  // }
-
-  // compare(a, b, isAsc) {
-  //   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
-  // }
-
   delete(id) {
     console.log("zz:", )
     var index = this.obj.indexOf(id);
     //this.obj.splice(index,1);
     let dialogRef = this.dialog.open(DeleteComponent, {
+      data:{
+        userId:id
+      }
     });
+
+    // const sub = dialogRef.componentInstance.close.subscribe((res) => {
+    //   // console.log("f data :",res);
+    //   if (res.status == 'delete') {
+    //     var updateObj = { "EnterName": EnterName.value, "UserName": UserName.value, "email": email.value, "gender": gender.value, "contact": contact.value, "city": gender.value, "animalControl": gender.animalControl };
+    //     this.service.deleteData(,d._id).subscribe((res) => {
+    //       console.log("delete : server result", res);
+    //       if (res['status'] == 'true') {
+    //         this.onSubmit(this.paginator);
+    //       } 
+    //     });
+    //   }//if
+    // });
+
     dialogRef.afterClosed().subscribe(result => {
-      this.http.get(this.apiUrl + '/delete/' + id._id).subscribe((Response) => {
-        console.log(Response);
+      // this.http.get(this.apiUrl + '/delete/' + id._id).subscribe((Response) => {
+      //   console.log(Response);
         this.onSubmit(this.paginator);
-      });
+      // });
+      console.log(result);
     });
     
   }
@@ -234,7 +226,7 @@ export class UserlistComponent implements OnInit {
       data.row = result;
       this.obj[this.index1] = result;
       this.service.updateData(this._id, result).subscribe((Response) => {
-        console.log(Response);
+        console.log("res",Response);
         this.onSubmit(this.paginator);
       })
     });
@@ -243,7 +235,7 @@ export class UserlistComponent implements OnInit {
   update(EnterName, UserName, email, gender, contact, city, animalControl) {
     console.log(this.index1);
     console.log("updates", EnterName.value, UserName.value, email.value, gender.value, contact.value, city.value, animalControl.value, );
-    var updateObj = { "EnterName": EnterName.value, "UserName": UserName.value, "email": email.value, "gender": gender.value, "contact": contact.value, "city": gender.value, "animalControl": gender.animalControl };
+    var updateObj = { "EnterName": EnterName.value, "UserName": UserName.value, "email": email.value, "gender": gender.value, "contact": contact.value, "city": city.value, "animalControl": animalControl.value };
     this.service.updateData(updateObj, this._id).subscribe((Response) => {
 
       console.log(Response);

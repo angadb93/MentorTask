@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import {DataService} from '../data.service';
 
 
 
@@ -17,6 +18,7 @@ export class EditComponent implements OnInit {
   ngOnInit() {
   }
   constructor(
+    public dataService: DataService,
     private http: HttpClient,
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<EditComponent>,
@@ -37,14 +39,22 @@ export class EditComponent implements OnInit {
 
   }
 
-  onNoClick(): void {
+  onNoClick(){
     console.log("formvalue:", this.eGroup.value);
 
     this.dialogRef.close(this.eGroup.value);
 
   }
   close(){
-    this.dialogRef.close(this.eGroup.value);
+    this.dialogRef.close();
   }
+
+  // onNoClick(): void {
+  //   this.dialogRef.close();
+  // }
+
+  // stopEdit(): void {
+  //   this.dataService.updateIssue(this.data);
+  // }
 
 }

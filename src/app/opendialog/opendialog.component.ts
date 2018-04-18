@@ -14,7 +14,7 @@ export class OpendialogComponent implements OnInit {
   ngOnInit() {
     console.log(this.data)
   }
-  onNoClick() {
-    this.dialogRef.close();
-  }
+  // onNoClick() {
+  //   this.dialogRef.close();
+  // }
 }

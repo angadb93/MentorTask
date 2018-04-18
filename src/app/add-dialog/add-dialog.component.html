@@ -43,9 +43,7 @@
         {{animal.name}}
       </mat-option>
     </mat-select>
-    <!-- <mat-error *ngIf="animalControl.hasError('required')">Please choose an animal</mat-error> -->
     <mat-error *ngIf="nGroup.controls['animalControl'].hasError('required')">Please choose an animal</mat-error>
-
   </mat-form-field>
 
   <div>

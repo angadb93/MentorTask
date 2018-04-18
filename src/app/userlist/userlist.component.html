@@ -38,7 +38,7 @@
 
     <ng-container matColumnDef="animalControl">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Animal</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.animalControl.name}}</mat-cell>
+      <mat-cell *matCellDef="let row"> {{row.animalControl?.name}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="hobbies">

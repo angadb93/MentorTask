@@ -17,19 +17,18 @@ export class DataService {
     return this.http.put(this.apiUrl + '/updateData/' + d, _id);
   }
 
+  deleteData(id){
+    console.log(id);
+    //return this.http.get(this.apiUrl+ '/deleteData/' + d, _id);
+    return this.http.get(this.apiUrl + '/delete/' + id);
+  } 
+
   search(pageIndex, pageSize, filterValue){
-    // if(filterValue==null)
-    // {
-    //   let data='null';
-    //   return this.http.get(this.apiUrl + '/' + pageIndex +'/' + pageSize + '/' + data);
-    // }
-    // else
-    // {
       return this.http.get(this.apiUrl + '/' + pageIndex +'/' + pageSize + '/' + filterValue);  
   }
 
-  deleteIssue (EnterName: string): void {
-    console.log(EnterName);
-  }
+  // deleteIssue (EnterName: string): void {
+  //   console.log(EnterName);
+  // }
 }
 
